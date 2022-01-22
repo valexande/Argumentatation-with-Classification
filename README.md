@@ -6,6 +6,12 @@ This repository is for the Argumentation Framework with Attack Classifiation tha
 
 - MAAFSemantics file contains the ASP code for each extension. The files are named in a manner which makes clear which file corresponds to which extension.
 
-- asprin-master file contains the source code that Potassco provides for the asprin module. We just provideit here because is tricky to find all the needed files. Notice that asrpin needs clingo 5.4 to run, for 5.5 is not compatible yet.
+- asprin-master file contains the source code that Potassco provides for the asprin module. Notice that asrpin needs clingo 5.4 to run, for 5.5 is not compatible yet.
 
-- asp&AAFD_API
+- asp&AAFD_API contains the web api. One can built locally the web interface from her/his computer (i.e., the server will be at your computer), only by executing the api.py file. The api will then run at IP.8888, where IP is your IP. Moreover, notice that asprin needs clingo 5.4 therefore !!before executing for the first time the api.py file!!, shoot the command "conda create --name asprin -c potassco asprin" in the cmd of the editor you are using.
+
+
+It is a Python project, thus we recommend PyCharm to run locally the api. At least that is what we did.
+
+
+The project now runs at (we will provide soon an URL).

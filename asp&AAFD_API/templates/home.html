@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>First Flask App</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+<script>
+
+    $(function(){
+    $("#c1, #c2").change(function(){
+        $("#text8").val("").attr("disabled",true);
+        if($("#c1").is(":checked")){
+            $("#text8").removeAttr("disabled");
+            $("#self").removeAttr("hidden");
+            $("#manual").attr("hidden", "hidden");
+            $("#submitSelf").removeAttr("hidden");
+        }
+        else if($("#c2").is(":checked")){
+            $("#text8").attr("disabled", "disabled");
+            $("#manual").removeAttr("hidden");
+            $("#self").attr("hidden", "hidden");
+        }
+    });
+});
+
+
+    $(function(){
+    $("#choiceNew1, #choiceNew2").change(function(){
+        $("").val("").attr("disabled",true);
+        if($("#choiceNew1").is(":checked")){
+            $("#submit").removeAttr("hidden");
+        }
+        else if($("#choiceNew2").is(":checked")){
+            $("#submit").removeAttr("hidden");
+        }
+    });
+});
+
+    $(function(){
+    $("#choiceProblem1, #choiceProblem2, #choiceProblem3, #choiceProblem4, #choiceProblem5, #choiceProblem6").change(function(){
+        $("").val("").attr("disabled",true);
+        if($("#choiceProblem1").is(":checked")){
+            $("#submit").removeAttr("hidden");
+        }
+        else if($("#choiceProblem2").is(":checked")){
+            $("#submit").removeAttr("hidden");
+        }
+        else if($("#choiceProblem3").is(":checked")){
+            $("#submit").removeAttr("hidden");
+        }
+        else if($("#choiceProblem4").is(":checked")){
+            $("#submit").removeAttr("hidden");
+        }
+        else if($("#choiceProblem5").is(":checked")){
+            $("#submit").removeAttr("hidden");
+        }
+        else if($("#choiceProblem6").is(":checked")){
+            $("#submit").removeAttr("hidden");
+        }
+    });
+});
+
+
+    $(function(){
+    $("#choice1, #choice2").change(function(){
+        $("").val("").attr("disabled",true);
+        if($("#choice1").is(":checked")){
+
+            $("#submit").removeAttr("hidden");
+        }
+        else if($("#choice2").is(":checked")){
+
+            $("#submit").removeAttr("hidden");
+        }
+    });
+});
+
+    $(function(){
+    $("#choiceProblemNew1, #choiceProblemNew2, #choiceProblemNew3, #choiceProblemNew4, #choiceProblemNew5, #choiceProblemNew6").change(function(){
+        $("").val("").attr("disabled",true);
+        if($("#choiceProblemNew1").is(":checked")){
+            $("#submit").removeAttr("hidden");
+        }
+        else if($("#choiceProblemNew2").is(":checked")){
+            $("#submit").removeAttr("hidden");
+        }
+        else if($("#choiceProblemNew3").is(":checked")){
+            $("#submit").removeAttr("hidden");
+        }
+        else if($("#choiceProblemNew4").is(":checked")){
+            $("#submit").removeAttr("hidden");
+        }
+        else if($("#choiceProblemNew5").is(":checked")){
+            $("#submit").removeAttr("hidden");
+        }
+        else if($("#choiceProblemNew5").is(":checked")){
+            $("#submit").removeAttr("hidden");
+        }
+    });
+});
+
+
+function myFunction() {
+var text1= $('#text1').val();
+var text3= $('#text3').val();
+
+
+if(document.getElementById('choiceProblemNew1').checked) {
+    var text5= "1";
+}
+else if(document.getElementById('choiceProblemNew2').checked) {
+    var text5= "2";
+}
+else if(document.getElementById('choiceProblemNew3').checked) {
+    var text5= "3";
+}
+else if(document.getElementById('choiceProblemNew4').checked) {
+    var text5= "4";
+}
+else if(document.getElementById('choiceProblemNew5').checked) {
+    var text5= "5";
+}
+else if(document.getElementById('choiceProblemNew6').checked) {
+    var text5= "6";
+}
+else{
+var text5= "0";
+}
+
+if(document.getElementById('choice1').checked) {
+    var text7= "1";
+}
+else if(document.getElementById('choice2').checked) {
+    var text7= "2";
+}
+else{
+var text7= "0";
+}
+var text8= $('#text8').val();
+
+
+if(document.getElementById('choiceProblem1').checked) {
+    var text9= "1";
+}
+else if(document.getElementById('choiceProblem2').checked) {
+    var text9= "2";
+}
+else if(document.getElementById('choiceProblem3').checked) {
+    var text9= "3";
+}
+else if(document.getElementById('choiceProblem4').checked) {
+    var text9= "4";
+}
+else if(document.getElementById('choiceProblem5').checked) {
+    var text9= "5";
+}
+else if(document.getElementById('choiceProblem6').checked) {
+    var text9= "6";
+}
+else{
+var text9= "0";
+}
+
+
+if(document.getElementById('choiceNew1').checked) {
+    var text11= "1";
+}
+else if(document.getElementById('choiceNew2').checked) {
+    var text11= "2";
+}
+else{
+var text11= "0";
+}
+
+
+
+  $.ajax({
+              url: "/join",
+              type: "POST",
+              data: {text1:text1,text3:text3,text5:text5,text7:text7,text8:text8,text9:text9,text11:text11}
+          }).done(function(response) {
+            var html= "<br><br><br><p> <b> RESULT : <b><p>";
+            response =response.result;
+
+
+                 $.each(response,function(key,val){
+                 console.log(val);
+                    html+= "<p>" + val + "<p>"
+                });
+
+                if($(".show-data").is(":empty")){
+                html+= `<a href="{{ url_for('home') }}"><button>Reset</button></a>`
+                }
+                else{
+                html+= `<a href="{{ url_for('home') }}"><button>Reset</button></a>`
+                $(".show-data a").remove();
+                var temp = $(".show-data").html();
+                }
+
+                html +="<br>";
+
+                $(".show-data").empty().append(html + temp);
+
+            });
+};
+
+  </script>
+<body>
+        Hello, do you want to write your own ASP or just give an argumentation framework?<br><br>
+        <input type="radio" id="c1" name="fav_language" value="1">
+        <label for="c1">Write my own rules.</label><br>
+        <input type="radio" id="c2" name="fav_language" value="2">
+        <label for="c2">Write only the argumentation framework.</label><br>
+
+        <div id="self" hidden>
+
+            <p>Please write your own ASP</p><br>
+            <textarea id="text8" name="text8" style="height:200px;width:1000px" maxlength="5000">
+            </textarea><br>Example: <br>% Main domain predicates definitions<br>
+                        argument(a;b;c;d).<br><br>
+                        attacks(a,b, conflict).<br>
+                        attacks(a,c, conflict).<br>
+                        attacks(a,b, defending).<br>
+                        attacks(b,c, defending).<br>
+                        attacks(d,a, defending).<br><br>
+                        Notice, instead of characters you can use numbers!<br><br>
+
+            <form>
+            <fieldset id="group1">
+            <p>What problem do you want me to solve?</p>
+            <input type="radio" id="choiceNew1" name="group1" value="1">
+            <label for="choice1">Find all the extensions of some type.</label><br>
+            <input type="radio" id="choiceNew2" name="group1" value="2">
+            <label for="choice2">Find only one extension of some type.</label><br>
+            <br><br>
+            </fieldset>
+
+            <fieldset id="group2">
+            <p>What extension do you want me to find?</p>
+            <input type="radio" id="choiceProblem1" name="group2" value="1">
+            <label for="choiceProblem1">conflict free (cf).</label><br>
+            <input type="radio" id="choiceProblem2" name="group2" value="2">
+            <label for="choiceProblem2">admissible (a).</label><br>
+            <input type="radio" id="choiceProblem3" name="group2" value="3">
+            <label for="choiceProblem3">complete (co).</label><br>
+            <input type="radio" id="choiceProblem4" name="group2" value="4">
+            <label for="choiceProblem4">grounded (gr).</label><br>
+            <input type="radio" id="choiceProblem5" name="group2" value="5">
+            <label for="choiceProblem5">preferred (pr).</label><br>
+            <input type="radio" id="choiceProblem6" name="group2" value="6">
+            <label for="choiceProblem6">stable (st).</label><br>
+            <br><br>
+                </fieldset>
+            </form>
+
+            <button id="submitSelf" type="button" hidden onclick="myFunction()">
+            Submit
+        </button>
+        </div>
+
+        <div id="manual" hidden>
+        Taking input from the user<br><br>
+            Number of arguments (A): <input type="text" id="text1" name="text1"> Any Number<br><br>
+            Attacks between Arguments (R): <input type="text" id="text3" name="text3"> Example: a0-a1-type,...,a1-a0-type'. The arguments should be in the form ai for i=1,...n, and the type = cf,def,no<br><br>
+
+            <form>
+            <fieldset id="group3">
+            <p>What problem do you want me to solve?</p>
+            <input type="radio" id="choice1" name="group3" value="1">
+            <label for="choice1">Find all the extensions of some type.</label><br>
+            <input type="radio" id="choice2" name="group3" value="2">
+            <label for="choice2">Find only one extension of some type.</label><br>
+            <br>
+            <b>Note: </b> The format must be as shown in the example!!<br><br>
+            </fieldset>
+
+            <fieldset id="group4">
+            <p>What extension do you want me to find?</p>
+            <input type="radio" id="choiceProblemNew1" name="group4" value="1">
+            <label for="choiceProblemNew1">conflict free (cf).</label><br>
+            <input type="radio" id="choiceProblemNew2" name="group4" value="2">
+            <label for="choiceProblemNew2">admissible (a).</label><br>
+            <input type="radio" id="choiceProblemNew3" name="group4" value="3">
+            <label for="choiceProblemNew3">complete (co).</label><br>
+            <input type="radio" id="choiceProblemNew4" name="group4" value="4">
+            <label for="choiceProblemNew4">grounded (gr).</label><br>
+            <input type="radio" id="choiceProblemNew5" name="group4" value="5">
+            <label for="choiceProblemNew5">preferred (pr).</label><br>
+            <input type="radio" id="choiceProblemNew6" name="group4" value="6">
+            <label for="choiceProblemNew6">stable (st).</label><br>
+            <br><br>
+                </fieldset>
+            </form>
+
+        <button id="submit" type="button" hidden onclick="myFunction()">
+            Submit
+        </button>
+        </div>
+
+    <div class="show-data" >
+    </div>
+</body>
+</html>

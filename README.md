@@ -14,4 +14,4 @@ This repository is for the Argumentation Framework with Attack Classifiation tha
 It is a Python project, thus we recommend PyCharm to run locally the api. At least that is what we did.
 
 
-The project now runs at (we will provide soon an URL).
+The project now runs at http://155.207.131.42:8888/ or http://argumentation.csd.auth.gr:8888/

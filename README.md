@@ -16,4 +16,4 @@ It is a Python project, thus we recommend PyCharm to run locally the api. At lea
 
 The project now runs at http://155.207.131.42:5000/ or http://argumentation.csd.auth.gr:5000/
 
-#Due to security reasons the server was down for some time, if you want to try the application please send as a mail at valexande@csd.auth.gr, so that we will give the new credentials.
+# Due to security reasons the server was down for some time, if you want to try the application please send as a mail at valexande@csd.auth.gr, so that we will give the new credentials.

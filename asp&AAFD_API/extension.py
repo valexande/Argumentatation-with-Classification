@@ -49,7 +49,8 @@ class compute():
         for f in final:
             finalString = finalString + f
 
-        finalString = finalString + helperGeneral[0].replace("\n\n", "\n")
+        print(finalString)
+        #finalString = finalString + helperGeneral[0].replace("\n\n", "\n")
 
 
         return finalString
@@ -136,9 +137,10 @@ class compute():
                       :- compliantArg(A), not co_extension(A).\n\n
                       %%%%%%%%%%%%%%%%%%%%%\n
                       % Grounded Extension (Def 6)\n
-                      #preference(p1,less(cardinality)){co_extension(A)}.\n
+                      #preference(p1,subset){co_extension(A)}.\n
                       #optimize(p1).\n
-                      #show co_extension/1."""
+                      #show co_extension/1.
+                     """
             f.write(text)
         elif self.choiceExtension == "pr":
             text = """% Conflict free Extension (Def 3)\n
@@ -158,11 +160,13 @@ class compute():
                       :- ad_extension(A), not defendedByExtension(A).\n\n
                       %%%%%%%%%%%%%%%%%%%%%\n
                       % Preferred Extension (Def 7)\n\n
-                      #preference(p1,more(cardinality)){ad_extension(A)}.\n
+                      #preference(p1,superset){ad_extension(A)}.\n
                       #optimize(p1).\n
-                      #show ad_extension/1."""
+                      #show ad_extension/1.
+                      """
             f.write(text)
         elif self.choiceExtension == "st":
+
             text = """
             %%%%%%%%%%%%%%%%%%%%%\n
             % Conflict free Extension (Def 3)\n\n
@@ -171,11 +175,16 @@ class compute():
             :- cf_extension(A1), cf_extension(A2), attacks(A1, A2, conflict).\n\n\n\n
             %%%%%%%%%%%%%%%%%%%%%\n
             % Stable Extension (Def 8)\n\n
-            #preference(p1,more(cardinality)){cf_extension(A)}.\n
+            #preference(p1,superset){cf_extension(A)}.\n
             #optimize(p1).\n\n
-            other(A) :- argument(A), not cf_extension(A).\n
-            :- other(A), cf_extension(B), attacks(B,A, defending).\n
-            #show cf_extension/1."""
+            other(A) :- argument(A), not cf_extension(A), cf_extension(B), attacks(B,A, defending).
+            :- argument(A), not other(A), not cf_extension(A). 
+            
+            %other(A) :- argument(A), not cf_extension(A).\n
+            %validAttack(A) :- other(A), cf_extension(B), attacks(B, A, defending).\n
+            %:- #count{A: other(A)} = X, #count{B: validAttack(B)} = Y, X != Y.\n         
+            #show cf_extension/1.\n
+            """
             f.write(text)
         else:
             pass
@@ -196,13 +205,13 @@ class compute():
         pfinal = ""
         if self.problem == "1":
             if self.choiceExtension in ['cf', 'a', 'co']:
-                os.chdir('C:/Users/USER/PycharmProjects/classificationAPI/asp&AAFD_API')
+                os.chdir('C:/Users/Alex Vassiliades/PycharmProjects/classificationAPI/asp&AAFD_API')
                 p = Popen(str('clingo semantics.lp framework.lp 0'), stdout=PIPE, stdin=PIPE, stderr=STDOUT)
                 grep_stdout = p.communicate()
                 pfinal = str(grep_stdout[0].decode('utf-8'))
                 return pfinal
             else:
-                os.chdir('C:/Users/USER/PycharmProjects/classificationAPI/asp&AAFD_API')
+                os.chdir('C:/Users/Alex Vassiliades/PycharmProjects/classificationAPI/asp&AAFD_API')
                 cmds = ["conda activate asprin", "asprin semantics.lp framework.lp 0", "conda deactivate"]
                 p = Popen('cmd.exe', stdin=PIPE, stdout=PIPE, stderr=PIPE, encoding='ISO-8859-1')
                 for cmd in cmds:
@@ -213,13 +222,13 @@ class compute():
                 return pfinal
         elif self.problem == "2":
             if self.choiceExtension in ['cf', 'a', 'co']:
-                os.chdir('C:/Users/USER/PycharmProjects/classificationAPI/asp&AAFD_API')
+                os.chdir('C:/Users/Alex Vassiliades/PycharmProjects/classificationAPI/asp&AAFD_API')
                 p = Popen(str('clingo semantics.lp framework.lp 1'), stdout=PIPE, stdin=PIPE, stderr=STDOUT)
                 grep_stdout = p.communicate()
                 pfinal = str(grep_stdout[0].decode('utf-8'))
                 return pfinal
             else:
-                os.chdir('C:/Users/USER/PycharmProjects/classificationAPI/asp&AAFD_API')
+                os.chdir('C:/Users/Alex Vassiliades/PycharmProjects/classificationAPI/asp&AAFD_API')
                 cmds = ["conda activate asprin", "asprin semantics.lp framework.lp 1", "conda deactivate"]
                 p = Popen('cmd.exe', stdin=PIPE, stdout=PIPE, stderr=PIPE, encoding='ISO-8859-1')
                 for cmd in cmds:
